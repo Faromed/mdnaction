@@ -138,9 +138,9 @@
                             <i class="fas fa-chevron-left"></i>
                         </a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item active"><a class="page-link text-success" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link text-success" href="#">3</a></li>
                     <li class="page-item">
                         <a class="page-link" href="#">
                             <i class="fas fa-chevron-right"></i>
@@ -180,7 +180,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(13, 110, 253, 0.85);
+        background: #009891;
         opacity: 0;
         transition: opacity 0.3s ease;
     }

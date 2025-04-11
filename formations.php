@@ -5,9 +5,9 @@
     <div class="row mb-5">
         <div class="col-12 text-center">
             <div class="mb-4">
-                <i class="fas fa-graduation-cap fa-3x text-primary mb-3"></i>
+                <i class="fas fa-graduation-cap fa-3x text-success mb-3"></i>
                 <h2 class="display-4 fw-bold">Mes Formations</h2>
-                <div class="divider mx-auto my-3" style="width: 80px; height: 4px; background-color: #0d6efd;"></div>
+                <div class="divider mx-auto my-3" style="width: 80px; height: 4px; background-color: #009891;"></div>
                 <p class="lead text-muted">Découvrez les formations que je propose pour développer vos compétences</p>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <div class="position-relative">
                     <img src="img/<?php echo $row['miniature'] ? $row['miniature'] : 'default_formation.jpg'; ?>" 
                          class="card-img-top rounded-top" alt="<?php echo $row['titre']; ?>">
-                    <div class="badge bg-primary position-absolute top-0 end-0 m-3">
+                    <div class="badge bg-light text-success position-absolute top-0 end-0 m-3">
                         Nouvelle formation
                     </div>
                 </div>
@@ -33,13 +33,13 @@
                     <h5 class="card-title fw-bold mb-3"><?php echo $row['titre']; ?></h5>
                     <p class="card-text text-muted mb-3"><?php echo substr($row['description'], 0, 100); ?>...</p>
                     <div class="d-flex align-items-center mb-3">
-                        <i class="far fa-clock text-primary me-2"></i>
+                        <i class="far fa-clock text-success me-2"></i>
                         <p class="card-text mb-0"><small>Durée : <?php echo $row['duree']; ?></small></p>
                     </div>
                 </div>
                 <div class="card-footer bg-white border-top-0 p-4">
                     <a href="formation_details.php?id=<?php echo $row['id']; ?>" 
-                       class="btn btn-primary w-100">
+                       class="btn btn-success w-100">
                         <i class="fas fa-info-circle me-2"></i>En savoir plus
                     </a>
                 </div>
@@ -53,9 +53,9 @@
         <div class="container">
             <div class="row mb-4">
                 <div class="col-12 text-center">
-                    <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                    <i class="fas fa-quote-left fa-2x text-success mb-3"></i>
                     <h2 class="fw-bold">Témoignages</h2>
-                    <div class="divider mx-auto my-3" style="width: 60px; height: 3px; background-color: #0d6efd;"></div>
+                    <div class="divider mx-auto my-3" style="width: 60px; height: 3px; background-color: #009891;"></div>
                 </div>
             </div>
 
@@ -75,7 +75,7 @@
                             <blockquote class="blockquote mb-0">
                                 <p class="fs-5 fst-italic">"<?php echo $testimonial['temoignage']; ?>"</p>
                                 <div class="d-flex align-items-center mt-3">
-                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" 
+                                    <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center me-3" 
                                          style="width: 50px; height: 50px;">
                                         <span class="fw-bold">
                                             <?php echo substr($testimonial['nom'], 0, 1); ?>
@@ -94,7 +94,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <a href="#" class="btn btn-outline-primary">
+                <a href="#" class="btn btn-outline-success">
                     <i class="fas fa-comments me-2"></i>Voir tous les témoignages
                 </a>
             </div>

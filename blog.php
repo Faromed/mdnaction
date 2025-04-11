@@ -5,7 +5,7 @@
     <div class="row mb-5">
         <div class="col-lg-8 mx-auto text-center">
             <h1 class="fw-bold display-5 mb-3">
-                <i class="fas fa-blog text-primary me-2"></i>Mon Blog
+                <i class="fas fa-blog text-success me-2"></i>Mon Blog
             </h1>
             <p class="lead text-muted">Retrouvez ici mes articles techniques, tutoriels et réflexions sur le monde du développement web et logiciel.</p>
         </div>
@@ -23,7 +23,7 @@
                             </span>
                             <input type="text" class="form-control border-start-0 bg-light" placeholder="Rechercher un article...">
                         </div>
-                        <button type="submit" class="btn btn-primary ms-2 px-4">Rechercher</button>
+                        <button type="submit" class="btn btn-success ms-2 px-4">Rechercher</button>
                     </form>
                 </div>
                 <div class="col-md-4">
@@ -48,7 +48,7 @@
             <div class="card h-100 border-0 shadow-sm hover-card">
                 <div class="position-relative">
                     <img src="img/<?php echo $row['image'] ? $row['image'] : 'default_blog.jpg'; ?>" class="card-img-top" alt="<?php echo $row['titre']; ?>">
-                    <div class="position-absolute top-0 end-0 bg-primary text-white px-3 py-1 m-3 rounded-pill">
+                    <div class="position-absolute top-0 end-0 bg-light text-dark px-3 py-1 m-3 rounded-pill border border-secondary border-2">
                         <small><i class="far fa-calendar-alt me-1"></i><?php echo date('d/m/Y', strtotime($row['date_publication'])); ?></small>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     <h4 class="card-title fw-bold mb-3"><?php echo $row['titre']; ?></h4>
                     <p class="card-text text-muted mb-4"><?php echo substr(strip_tags($row['contenu']), 0, 150); ?>...</p>
                     <div class="d-flex justify-content-between align-items-center">
-                        <a href="blog_post.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-primary rounded-pill px-4">
+                        <a href="blog_post.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-success rounded-pill px-4">
                             <i class="fas fa-book-reader me-2"></i>Lire la suite
                         </a>
                         <?php
@@ -81,7 +81,7 @@
                     <i class="fas fa-chevron-left me-1"></i>Précédent
                 </a>
             </li>
-            <li class="page-item active" aria-current="page">
+            <li class="page-item bg-success active" aria-current="page">
                 <a class="page-link" href="#">1</a>
             </li>
             <li class="page-item">
