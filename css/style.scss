@@ -1,0 +1,79 @@
+// Import de Bootstrap
+@import '../css/bootstrap.min.css';
+
+// Variables de couleurs
+$primary-color: #00CED1;
+$secondary-color: #32CD32;
+$accent-color: #FF8C00;
+$neutral-light: #F4F4F4;
+$text-primary: #333333;
+$text-on-colored: #FFFFFF;
+
+// Style des liens
+a {
+    color: $primary-color;
+    text-decoration: none;
+    &:hover {
+        color: $accent-color;
+        text-decoration: underline;
+    }
+}
+
+// Boutons
+.btn-primary {
+    background-color: $primary-color;
+    color: $text-on-colored;
+    border: none;
+    &:hover {
+        background-color: $secondary-color;
+    }
+}
+
+.btn-outline-primary {
+    color: $primary-color;
+    border-color: $primary-color;
+    &:hover {
+        background-color: $primary-color;
+        color: $text-on-colored;
+    }
+}
+
+// Ajoutez ici d'autres styles personnalisés
+.jumbotron {
+    background-color: $neutral-light;
+}
+
+.card {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bg-light {
+    background-color: $neutral-light !important;
+}
+
+.navbar-light .navbar-brand {
+    color: $text-primary;
+    &:hover, &:focus {
+        color: $primary-color;
+    }
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: $text-primary;
+    &:hover, &:focus {
+        color: $primary-color;
+    }
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: $text-on-colored;
+    &:hover, &:focus {
+        color: $secondary-color;
+    }
+}
+
+footer {
+    background-color: $neutral-light;
+    color: $text-primary;
+}
