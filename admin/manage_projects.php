@@ -239,7 +239,7 @@ foreach ($projets as $projet) {
                                             <a href="#" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="edit_projet.php?id=<?php echo $projet['id']; ?>" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                                            <a href="edit_project.php?id=<?php echo $projet['id']; ?>" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $projet['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
@@ -271,7 +271,7 @@ foreach ($projets as $projet) {
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                                             <i class="fas fa-times me-2"></i>Annuler
                                                         </button>
-                                                        <a href="delete_projet.php?id=<?php echo $projet['id']; ?>" class="btn btn-danger">
+                                                        <a href="delete_project.php?id=<?php echo $projet['id']; ?>" class="btn btn-danger">
                                                             <i class="fas fa-trash-alt me-2"></i>Supprimer
                                                         </a>
                                                     </div>
@@ -296,68 +296,73 @@ foreach ($projets as $projet) {
                             </tr>
                         <?php endif; ?>
                     </tbody>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<?php
-require '../inc/db_config.php';
-require 'inc/auth.php';
-force_login();
-include 'inc/header.php';
-include 'inc/functions.php';
-
-$projets = get_all($pdo, 'projets');
-?>
-
-<h2>Gestion des Projets</h2>
-
-<p><a href="add_project.php" class="btn btn-success">Ajouter un projet</a></p>
-
-<?php if (isset($_SESSION['success_message'])): ?>
-    <div class="alert alert-success"><?php echo $_SESSION['success_message']; unset($_SESSION['success_message']); ?></div>
-<?php endif; ?>
-
-<?php if (isset($_SESSION['error_message'])): ?>
-    <div class="alert alert-danger"><?php echo $_SESSION['error_message']; unset($_SESSION['error_message']); ?></div>
-<?php endif; ?>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Titre</th>
-            <th>Date de création</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php if ($projets): ?>
-            <?php foreach ($projets as $projet): ?>
-                <tr>
-                    <td><?php echo $projet['id']; ?></td>
-                    <td><?php echo htmlspecialchars($projet['titre']); ?></td>
-                    <td><?php echo date('d/m/Y', strtotime($projet['date_creation'])); ?></td>
-                    <td>
-                        <a href="edit_project.php?id=<?php echo $projet['id']; ?>" class="btn btn-sm btn-primary">Modifier</a>
-                        <a href="delete_project.php?id=<?php echo $projet['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?');">Supprimer</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr><td colspan="3">Aucun projet enregistré.</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <?php if (count($projets) > 10): ?>
+        <div class="card-footer bg-white border-0 py-3">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Suivant</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
         <?php endif; ?>
-    </tbody>
-</table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialiser les tooltips
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+        
+        // Animation du bouton d'actualisation
+        const refreshBtn = document.getElementById('refreshTable');
+        refreshBtn.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            icon.classList.add('fa-spin');
+            
+            // Simuler une actualisation après 1 seconde
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        });
+        
+        // Auto-fermeture des alertes après 5 secondes
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            setTimeout(() => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }, 5000);
+        });
+        
+        // Animation des lignes du tableau au survol
+        const tableRows = document.querySelectorAll('tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.transition = 'background-color 0.3s';
+                this.style.backgroundColor = 'rgba(0, 123, 255, 0.05)';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+            });
+        });
+    });
+</script>
 
 <?php include 'inc/footer.php'; ?>
