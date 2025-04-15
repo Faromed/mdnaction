@@ -5,9 +5,9 @@
     <div class="row mb-5">
         <div class="col-12 text-center">
             <div class="mb-4">
-                <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
+                <i class="fas fa-cogs fa-3x text-success mb-3"></i>
                 <h2 class="display-4 fw-bold">Mes Services</h2>
-                <div class="divider mx-auto my-3" style="width: 80px; height: 4px; background-color: #0d6efd;"></div>
+                <div class="divider mx-auto my-3" style="width: 80px; height: 4px; background-color:rgb(7, 155, 74);"></div>
                 <p class="lead text-muted">Découvrez les prestations que je propose pour vous accompagner dans vos projets</p>
             </div>
         </div>
@@ -43,7 +43,7 @@
             }
             
             // Déterminer la couleur de la carte
-            $colors = ['primary', 'info', 'success', 'warning']; 
+            $colors = ['success', 'info', 'success', 'warning']; 
             $card_color = $colors[($count - 1) % count($colors)];
         ?>
         <div class="col">
@@ -111,7 +111,7 @@
     <section class="bg-light rounded-3 p-5 mb-5 shadow-sm">
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h3 class="h2 fw-bold"><i class="fas fa-question-circle text-primary me-2"></i>Comment ça marche ?</h3>
+                <h3 class="h2 fw-bold"><i class="fas fa-question-circle text-success me-2"></i>Comment ça marche ?</h3>
                 <p class="text-muted">Une méthodologie simple et efficace pour répondre au mieux à vos besoins</p>
             </div>
         </div>
@@ -121,7 +121,7 @@
                 <div class="card h-100 border-0 rounded-3">
                     <div class="card-body text-center p-4">
                         <div class="process-icon mb-3">
-                            <span class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto">
+                            <span class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto">
                                 <i class="fas fa-comments fa-2x"></i>
                             </span>
                             <div class="process-step">1</div>
@@ -135,7 +135,7 @@
                 <div class="card h-100 border-0 rounded-3">
                     <div class="card-body text-center p-4">
                         <div class="process-icon mb-3">
-                            <span class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto">
+                            <span class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto">
                                 <i class="fas fa-file-contract fa-2x"></i>
                             </span>
                             <div class="process-step">2</div>
@@ -149,7 +149,7 @@
                 <div class="card h-100 border-0 rounded-3">
                     <div class="card-body text-center p-4">
                         <div class="process-icon mb-3">
-                            <span class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto">
+                            <span class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center mx-auto">
                                 <i class="fas fa-rocket fa-2x"></i>
                             </span>
                             <div class="process-step">3</div>
@@ -188,7 +188,7 @@
                             <blockquote class="blockquote mb-0">
                                 <p class="fs-6 fst-italic">"<?php echo $testimonial['temoignage']; ?>"</p>
                                 <div class="d-flex align-items-center mt-3">
-                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" 
+                                    <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center me-3" 
                                          style="width: 40px; height: 40px;">
                                         <span class="fw-bold">
                                             <?php echo substr($testimonial['nom'], 0, 1); ?>
@@ -212,7 +212,7 @@
     <section class="bg-light rounded-3 p-5 shadow-sm">
         <div class="row mb-4">
             <div class="col-12 text-center">
-                <h3 class="h2 fw-bold"><i class="fas fa-question-circle text-primary me-2"></i>Questions fréquentes</h3>
+                <h3 class="h2 fw-bold"><i class="fas fa-question-circle text-success me-2"></i>Questions fréquentes</h3>
                 <p class="text-muted">Trouvez rapidement des réponses à vos interrogations</p>
             </div>
         </div>
@@ -223,7 +223,7 @@
                     <div class="accordion-item shadow-sm border-0 rounded mb-3">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <i class="fas fa-question-circle text-primary me-2"></i>Comment se déroule notre collaboration ?
+                                <i class="fas fa-question-circle text-success me-2"></i>Comment se déroule notre collaboration ?
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion1">
@@ -235,7 +235,7 @@
                     <div class="accordion-item shadow-sm border-0 rounded mb-3">
                         <h2 class="accordion-header" id="headingTwo">
                             <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <i class="fas fa-question-circle text-primary me-2"></i>Quels sont vos délais moyens de réalisation ?
+                                <i class="fas fa-question-circle text-success me-2"></i>Quels sont vos délais moyens de réalisation ?
                             </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion1">
@@ -251,7 +251,7 @@
                     <div class="accordion-item shadow-sm border-0 rounded mb-3">
                         <h2 class="accordion-header" id="headingThree">
                             <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <i class="fas fa-question-circle text-primary me-2"></i>Proposez-vous un suivi après la livraison du projet ?
+                                <i class="fas fa-question-circle text-success me-2"></i>Proposez-vous un suivi après la livraison du projet ?
                             </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion2">
@@ -263,7 +263,7 @@
                     <div class="accordion-item shadow-sm border-0 rounded">
                         <h2 class="accordion-header" id="headingFour">
                             <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                <i class="fas fa-question-circle text-primary me-2"></i>Comment sont déterminés vos tarifs ?
+                                <i class="fas fa-question-circle text-success me-2"></i>Comment sont déterminés vos tarifs ?
                             </button>
                         </h2>
                         <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion2">
@@ -279,7 +279,7 @@
         <div class="row mt-4">
             <div class="col-12 text-center">
                 <p class="mb-4">Vous avez d'autres questions ?</p>
-                <a href="contact.php" class="btn btn-primary">
+                <a href="contact.php" class="btn btn-success">
                     <i class="fas fa-envelope me-2"></i>Me contacter
                 </a>
             </div>

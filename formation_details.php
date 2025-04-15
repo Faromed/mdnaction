@@ -86,7 +86,7 @@
                 <!-- Onglets -->
                 <ul class="nav nav-tabs mb-4" id="formationTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">
+                        <button class="nav-link text-success active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">
                             <i class="fas fa-align-left me-2"></i>Description
                         </button>
                     </li>
@@ -207,12 +207,12 @@
                     <!-- Formateur -->
                     <div class="tab-pane fade" id="formateur" role="tabpanel" aria-labelledby="formateur-tab">
                         <div class="text-center mb-4">
-                            <img src="img/formateur.jpg" alt="Formateur" class="rounded-circle img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
-                            <h3 class="h4">John Doe</h3>
+                            <img src="img/moi.jpg" alt="Formateur" class="rounded-circle img-thumbnail mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                            <h3 class="h4">Farel Aubin MEDENOU</h3>
                             <p class="text-muted mb-3">Expert en développement web & formateur</p>
                             <div class="d-flex justify-content-center gap-2 mb-4">
                                 <a href="#" class="btn btn-sm btn-outline-success rounded-circle"><i class="fab fa-linkedin-in"></i></a>
-                                <a href="#" class="btn btn-sm btn-outline-success rounded-circle"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="btn btn-sm btn-outline-success rounded-circle"><i class="fab fa-facebook"></i></a>
                                 <a href="#" class="btn btn-sm btn-outline-success rounded-circle"><i class="fab fa-github"></i></a>
                             </div>
                         </div>
