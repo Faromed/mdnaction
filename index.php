@@ -1,7 +1,7 @@
 <?php include 'inc/header.php'; ?>
 
 <!-- Hero Section avec animation et image de fond -->
-<div class="jumbotron bg-success bg-opacity-50 bg-gradient text-white p-5 rounded-3 shadow position-relative overflow-hidden">
+<div class="jumbotron text-white p-5 rounded-3 shadow position-relative overflow-hidden" style="background-image: url('img/banniere1.png'); background-size: cover; background-position: center;">
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-8">
