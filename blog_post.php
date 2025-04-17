@@ -70,7 +70,16 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                     <h6 class="fw-bold mb-0"><?php echo htmlspecialchars($comment['nom']); ?></h6>
                                     <small class="text-muted ms-2">• <?php echo date('d/m/Y à H:i', strtotime($comment['date_creation'])); ?></small>
                                 </div>
-                                <p class="mb-0"><?php echo htmlspecialchars($comment['contenu']); ?></p>
+                                <p class="mb-0"><?php echo htmlspecialchars($comment['contenu']); ?></p> 
+                                <!-- Réponse de l'administrateur -->
+                                <div class="admin-reply mt-3 ms-4 border-start border-success ps-3">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <span class="badge bg-success me-2">Admin</span>
+                                        <h6 class="fw-bold mb-0 small"></h6>
+                                        <small class="text-muted ms-2"></small>
+                                    </div>
+                                    <p class="mb-0 fst-italic"><?php echo htmlspecialchars($comment['reponse_admin']); ?></p>
+                                </div>
                             </div>
                         </div>
                     <?php

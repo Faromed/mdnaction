@@ -2,7 +2,6 @@
 require '../inc/db_config.php';
 require 'inc/auth.php';
 force_login();
-include 'inc/header.php';
 include 'inc/functions.php';
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -64,6 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+
+include 'inc/header.php';
 // Récupérer la liste des images disponibles (optionnel)
 $images_directory = '../img/formations/';
 $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
