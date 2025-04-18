@@ -104,12 +104,6 @@ if (is_dir($images_directory)) {
 include 'inc/header.php';
 ?>
 
-<!-- CSS amélioré avec Bootstrap 5 -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
-<!-- Ajout de l'éditeur Summernote pour un champ description enrichi -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-
 
 <div class="container-fluid px-4 py-4">
     <!-- En-tête de la page avec breadcrumb -->
@@ -324,12 +318,6 @@ include 'inc/header.php';
     </div>
 </div>
 
-<!-- Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<!-- Éditeur WYSIWYG Summernote -->
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -364,9 +352,9 @@ include 'inc/header.php';
         // Mettre en évidence l'image sélectionnée
         const imageItems = document.querySelectorAll('.image-item');
         imageItems.forEach(item => {
-            item.classList.remove('border', 'border-primary');
+            item.classList.remove('border', 'border-success');
         });
-        event.currentTarget.classList.add('border', 'border-primary');
+        event.currentTarget.classList.add('border', 'border-success');
         
         // Déclencher l'événement change pour mettre à jour l'aperçu
         $('#miniature').trigger('change');
@@ -470,7 +458,7 @@ include 'inc/header.php';
     }
     
     .card-header.bg-gradient {
-        background-image: linear-gradient(to right, #0d6efd, #0a58ca);
+        background-image: linear-gradient(to right,rgb(19, 112, 6),rgb(19, 112, 6));
     }
     
     .form-control:focus, .form-select:focus {

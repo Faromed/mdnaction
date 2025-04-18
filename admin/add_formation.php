@@ -56,8 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Breadcrumb -->
             <nav aria-label="breadcrumb" class="mb-4">
                 <ol class="breadcrumb bg-light p-3 rounded shadow-sm">
-                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none"><i class="fas fa-home"></i> Tableau de bord</a></li>
-                    <li class="breadcrumb-item"><a href="manage_formations.php" class="text-decoration-none">Formations</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none text-success"><i class="fas fa-home"></i> Tableau de bord</a></li>
+                    <li class="breadcrumb-item"><a href="manage_formations.php" class="text-decoration-none text-success">Formations</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Ajouter une formation</li>
                 </ol>
             </nav>

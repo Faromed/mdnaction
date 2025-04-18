@@ -55,13 +55,13 @@ include 'inc/header.php';
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
-                    <li class="breadcrumb-item"><a href="manage_comments.php" class="text-decoration-none">Commentaires</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none text-success"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
+                    <li class="breadcrumb-item"><a href="manage_comments.php" class="text-decoration-none text-success">Commentaires</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Modérer</li>
                 </ol>
             </nav>
             <h1 class="h2 mb-0 mt-2 fw-bold">
-                <i class="fas fa-comment text-primary me-2"></i>Modération du Commentaire
+                <i class="fas fa-comment text-success me-2"></i>Modération du Commentaire
             </h1>
         </div>
         <div>
@@ -86,8 +86,8 @@ include 'inc/header.php';
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-light border-0 py-3">
                     <div class="d-flex align-items-center">
-                        <span class="icon-circle bg-primary bg-opacity-10 p-3 rounded-circle me-3">
-                            <i class="fas fa-comment-alt text-primary"></i>
+                        <span class="icon-circle bg-success bg-opacity-10 p-3 rounded-circle me-3">
+                            <i class="fas fa-comment-alt text-success"></i>
                         </span>
                         <div>
                             <h5 class="mb-0 fw-bold">Commentaire #<?php echo $comment['id']; ?></h5>
@@ -99,7 +99,7 @@ include 'inc/header.php';
                     <div class="mb-4 p-3 border rounded bg-light">
                         <div class="mb-2 d-flex justify-content-between align-items-center">
                             <div>
-                                <strong class="text-primary">
+                                <strong class="text-success">
                                     <i class="fas fa-user-circle me-2"></i><?php echo htmlspecialchars($comment['nom']); ?>
                                 </strong>
                                 <span class="text-muted ms-2">
@@ -128,7 +128,7 @@ include 'inc/header.php';
                             <?php endif; ?>
                             <div>
                                 <h6 class="mb-1"><?php echo htmlspecialchars($article['titre']); ?></h6>
-                                <a href="edit_blog.php?id=<?php echo $article['id']; ?>" class="btn btn-sm btn-outline-primary">
+                                <a href="edit_blog.php?id=<?php echo $article['id']; ?>" class="btn btn-sm btn-outline-success">
                                     <i class="fas fa-edit me-1"></i>Modifier l'article
                                 </a>
                                 <a href="../article.php?id=<?php echo $article['id']; ?>" target="_blank" class="btn btn-sm btn-outline-secondary ms-1">
@@ -173,7 +173,7 @@ include 'inc/header.php';
                                 <i class="fas fa-times me-2"></i>Annuler
                             </a>
                             <div>
-                                <button type="submit" class="btn btn-primary px-4">
+                                <button type="submit" class="btn btn-success px-4">
                                     <i class="fas fa-save me-2"></i>Enregistrer les modifications
                                 </button>
                             </div>
@@ -219,7 +219,7 @@ include 'inc/header.php';
                             <strong>Rejeter</strong> les spam, insultes ou propos inappropriés
                         </li>
                         <li class="list-group-item bg-transparent px-0">
-                            <i class="fas fa-reply text-primary me-2"></i>
+                            <i class="fas fa-reply text-success me-2"></i>
                             <strong>Répondre</strong> aux questions et clarifier les malentendus
                         </li>
                     </ul>

@@ -2,7 +2,6 @@
 require '../inc/db_config.php';
 require 'inc/auth.php';
 force_login();
-include 'inc/header.php';
 include 'inc/functions.php';
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -24,7 +23,7 @@ if (!$service) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = trim($_POST['titre']);
     $description = trim($_POST['description']);
-    $image_ou_icone = trim($_POST['image_ou_icone']);
+    $image = trim($_POST['miniature']);
     $prix = trim($_POST['prix']);
 
     // Validation des données
@@ -41,11 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("UPDATE services SET 
                 titre = ?, 
                 description = ?, 
-                image_ou_icone = ?, 
+                image = ?, 
                 prix = ?,
                 date_modification = NOW()
                 WHERE id = ?");
-            $stmt->execute([$titre, $description, $image_ou_icone, $prix, $id]);
+            $stmt->execute([$titre, $description, $image, $prix, $id]);
             
             $_SESSION['success_message'] = 'Le service <strong>' . htmlspecialchars($titre) . '</strong> a été mis à jour avec succès.';
             header('Location: manage_services.php');
@@ -56,20 +55,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Récupérer la liste des images disponibles (optionnel)
-$images_directory = '../img/services/';
-$allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'];
-$available_images = [];
-
-if (is_dir($images_directory)) {
-    $files = scandir($images_directory);
+// Récupérer les images du dossier img
+$images = [];
+$imgDirectory = '../img/'; // Chemin vers le dossier img
+if (is_dir($imgDirectory)) {
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']; // Extensions autorisées
+    $files = scandir($imgDirectory);
+    
     foreach ($files as $file) {
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
-        if ($file !== '.' && $file !== '..' && in_array(strtolower($extension), $allowed_extensions)) {
-            $available_images[] = $file;
+        $extension = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        if ($file !== '.' && $file !== '..' && in_array($extension, $allowedExtensions)) {
+            $images[] = [
+                'nom_fichier' => $file,
+                'chemin' => $imgDirectory . $file
+            ];
         }
     }
 }
+
+include 'inc/header.php';
 ?>
 
 <div class="container-fluid px-4 py-4">
@@ -181,25 +185,39 @@ if (is_dir($images_directory)) {
                     <div class="col-lg-4">
                         <div class="card border bg-light mb-4">
                             <div class="card-header bg-light border-bottom-0">
-                                <h5 class="mb-0"><i class="fas fa-image me-2"></i>Image ou Icône</h5>
+                                <h5 class="mb-0"><i class="fas fa-image me-2"></i>Image principale</h5>
                             </div>
                             <div class="card-body">
-                                <?php if (!empty($service['image_ou_icone']) && file_exists($images_directory . $service['image_ou_icone'])): ?>
+                                <?php if (!empty($post['image']) && file_exists($images_directory . $service['image'])): ?>
                                     <div class="text-center mb-3">
-                                        <img src="<?php echo '../img/services/' . htmlspecialchars($service['image_ou_icone']); ?>" alt="Image du service" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+                                        <img src="<?php echo '../img/blog/' . htmlspecialchars($service['image']); ?>" alt="Image de l'article" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
                                     </div>
                                 <?php endif; ?>
                                 
                                 <div class="mb-3">
-                                    <label for="image_ou_icone" class="form-label fw-semibold">Nom du fichier image</label>
+                                    <label for="miniature" class="form-label fw-semibold">Nom du fichier image</label>
                                     <div class="input-group">
-                                        <span class="input-group-text bg-light"><i class="fas fa-file-image"></i></span>
-                                        <input type="text" class="form-control" id="image_ou_icone" name="image_ou_icone" value="<?php echo htmlspecialchars($service['image_ou_icone']); ?>">
+                                        <select class="form-select form-select-success border-success image-select" id="miniature" name="miniature">
+                                            <option value="">Sélectionnez une image</option>
+                                            <?php foreach ($images as $image): ?>
+                                                <option value="<?php echo htmlspecialchars($image['nom_fichier']); ?>" 
+                                                        data-img-src="<?php echo htmlspecialchars($image['chemin']); ?>"
+                                                        <?php if ($service['image'] == $image['nom_fichier']) echo 'selected'; ?>>
+                                                    <?php echo htmlspecialchars($image['nom_fichier']); ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                     <div class="form-text">
-                                        <a href="upload_image.php" target="_blank" class="text-decoration-none">
+                                        <a href="upload_image.php" target="_blank" class="text-decoration-none text-success">
                                             <i class="fas fa-upload me-1"></i>Téléverser une nouvelle image
                                         </a>
+                                    </div>
+                                </div>
+                                <div class="mt-4" id="image-preview">
+                                    <div class="text-center p-5 border border-dashed rounded">
+                                        <i class="fas fa-image fa-3x text-muted mb-3"></i>
+                                        <p class="text-muted mb-0">Aucune image sélectionnée</p>
                                     </div>
                                 </div>
                                 
@@ -210,7 +228,7 @@ if (is_dir($images_directory)) {
                                         <div class="d-flex flex-wrap gap-2">
                                             <?php foreach($available_images as $image): ?>
                                             <div class="image-item" onclick="selectImage('<?php echo htmlspecialchars($image); ?>')">
-                                                <img src="<?php echo '../img/services/' . htmlspecialchars($image); ?>" alt="<?php echo htmlspecialchars($image); ?>" class="img-thumbnail" style="width: 60px; cursor: pointer;">
+                                                <img src="<?php echo '../img/blog/' . htmlspecialchars($image); ?>" alt="<?php echo htmlspecialchars($image); ?>" class="img-thumbnail" style="width: 60px; cursor: pointer;">
                                             </div>
                                             <?php endforeach; ?>
                                         </div>
@@ -220,6 +238,7 @@ if (is_dir($images_directory)) {
                                 <?php endif; ?>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 
@@ -280,7 +299,127 @@ if (is_dir($images_directory)) {
             item.classList.remove('border', 'border-primary');
         });
         event.currentTarget.classList.add('border', 'border-primary');
+
+        // Déclencher l'événement change pour mettre à jour l'aperçu
+        $('#miniature').trigger('change');
+    }
+
+    // Initialisation des composants
+    $(document).ready(function() {
+        // Initialisation de Select2 pour les images
+        $('.image-select').select2({
+            theme: 'bootstrap-5',
+            templateResult: formatOption,
+            templateSelection: formatOptionSelection,
+            dropdownCssClass: 'shadow'
+        });
+        // Afficher l'aperçu de l'image sélectionnée
+        updateImagePreview();
+        
+        // Mettre à jour l'aperçu lorsqu'une nouvelle image est sélectionnée
+        $('#miniature').on('change', function() {
+            updateImagePreview();
+        });
+
+    });
+
+        // Fonction pour formater les options dans la liste déroulante
+    function formatOption(option) {
+        if (!option.id) {
+            return option.text;
+        }
+        
+        var imgSrc = $(option.element).data('img-src');
+        var $option = $(
+            '<div class="d-flex align-items-center">' +
+                '<img src="' + imgSrc + '" class="img-fluid rounded" style="width: 60px; height: 40px; object-fit: cover;" />' +
+                '<span class="ms-3">' + option.text + '</span>' +
+            '</div>'
+        );
+        
+        return $option;
+    }
+
+    // Fonction pour formater l'option sélectionnée
+    function formatOptionSelection(option) {
+        if (!option.id) {
+            return option.text;
+        }
+        
+        var imgSrc = $(option.element).data('img-src');
+        var $option = $(
+            '<div class="d-flex align-items-center">' +
+                '<img src="' + imgSrc + '" class="rounded" style="width: 25px; height: 25px; object-fit: cover;" />' +
+                '<span class="ms-2">' + option.text + '</span>' +
+            '</div>'
+        );
+        
+        return $option;
+    }
+    
+    // Fonction pour mettre à jour l'aperçu de l'image
+    function updateImagePreview() {
+        const select = document.getElementById('miniature');
+        const previewDiv = document.getElementById('image-preview');
+        
+        if (select.value) {
+            const selectedOption = select.options[select.selectedIndex];
+            const imgSrc = $(selectedOption).data('img-src');
+            
+            previewDiv.innerHTML = `
+                <div class="text-center p-3">
+                    <div class="card">
+                    <div class="card-body p-2">
+                        <p class="text-muted mb-1">Aperçu de l'image sélectionnée :</p>
+                        <img src="${imgSrc}" class="img-thumbnail" style="max-height: 150px;" alt="${select.value}">
+                    </div>
+                </div>
+                    <div class="text-muted small">Cette image sera affichée comme couverture de votre formation</div>
+                </div>
+            `;
+        } else {
+            previewDiv.innerHTML = `
+                <div class="text-center p-5 border border-dashed rounded">
+                    <i class="fas fa-image fa-3x text-muted mb-3"></i>
+                    <p class="text-muted mb-0">Aucune image sélectionnée</p>
+                </div>
+            `;
+        }
     }
 </script>
+
+<style>
+    /* Styles améliorés */
+    .border-dashed {
+        border-style: dashed !important;
+    }
+    
+    .select2-container--bootstrap-5 .select2-selection {
+        padding: 0.375rem 0.75rem;
+        height: auto;
+        min-height: 38px;
+    }
+    
+    .card-header.bg-gradient {
+        background-image: linear-gradient(to right, #0d6efd, #0a58ca);
+    }
+    
+    .form-control:focus, .form-select:focus {
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
+    
+    /* Animation pour les conseils */
+    .badge.rounded-circle {
+        transition: all 0.3s ease;
+    }
+    .badge.rounded-circle:hover {
+        transform: scale(1.2);
+    }
+     /* Changer la couleur de focus des éléments select standards */
+     .form-select:focus {
+        border-color: #198754;
+        box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    }
+</style>
 
 <?php include 'inc/footer.php'; ?>

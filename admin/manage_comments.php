@@ -24,18 +24,62 @@ if (!empty($search)) {
 }
 
 // Trier les commentaires
-if (!empty($comments)) {
+// if (!empty($comments)) {
+//     $column = array_column($comments, $sort);
+//     $direction = ($order === 'ASC') ? SORT_ASC : SORT_DESC;
+//     array_multisort($column, $direction, $comments);
+// }
+
+// // Calcul des statistiques
+// $total_comments = count($comments);
+// $approved_comments = count(array_filter($comments, function($comment) {
+//     return $comment['est_approuve'] == 1;
+// }));
+// $pending_comments = $total_comments - $approved_comments;
+
+/// Pagination Logic
+$items_per_page = 10;
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+// Requête SQL paginée avec la jointure
+$offset = ($current_page - 1) * $items_per_page;
+
+// Compter le nombre total de commentaires pour la pagination
+$total_comments_query = $pdo->query("SELECT COUNT(*) FROM commentaires");
+$total_comments = $total_comments_query->fetchColumn();
+
+// Calculer le nombre total de pages
+$total_pages = ceil($total_comments / $items_per_page);
+
+// Récupérer les commentaires pour la page actuelle avec la jointure
+$sql = "SELECT c.*, b.titre AS article_titre 
+        FROM commentaires c 
+        JOIN blog b ON c.article_id = b.id 
+        ORDER BY c.date_creation DESC 
+        LIMIT $items_per_page OFFSET $offset";
+$comments = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+// Si une recherche est effectuée, filtrer les résultats
+if (!empty($search)) {
+    $comments = array_filter($comments, function($comment) use ($search) {
+        return stripos($comment['nom'], $search) !== false || 
+               stripos($comment['contenu'], $search) !== false ||
+               stripos($comment['article_titre'], $search) !== false;
+    });
+}
+
+// Pour le tri
+if (!empty($comments) && isset($sort) && isset($order)) {
     $column = array_column($comments, $sort);
     $direction = ($order === 'ASC') ? SORT_ASC : SORT_DESC;
     array_multisort($column, $direction, $comments);
 }
 
 // Calcul des statistiques
-$total_comments = count($comments);
 $approved_comments = count(array_filter($comments, function($comment) {
     return $comment['est_approuve'] == 1;
 }));
-$pending_comments = $total_comments - $approved_comments;
+$pending_comments = count($comments) - $approved_comments;
 ?>
 
 <div class="container-fluid px-4 py-4">
@@ -322,18 +366,23 @@ $pending_comments = $total_comments - $approved_comments;
         </div>
         
         <!-- Pagination -->
-        <?php if (count($comments) > 10): ?>
+        <?php if ($total_pages > 1): // Affiche la pagination seulement s'il y a plus d'une page ?>
         <div class="card-footer bg-white border-0 py-3">
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center mb-0">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
+
+                    <li class="page-item <?php if ($current_page <= 1) echo 'disabled'; // Désactive si sur la première page ?>">
+                        <a class="page-link text-success" href="?page=<?php echo $current_page - 1; ?>&sort=<?php echo $sort; ?>&order=<?php echo $order; ?>&search=<?php echo urlencode($search); ?>">Précédent</a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Suivant</a>
+
+                    <?php for ($i = 1; $i <= $total_pages; $i++): // Boucle pour générer un lien pour chaque page ?>
+                        <li class="page-item <?php if ($i === $current_page) echo 'active'; // Ajoute la classe 'active' pour la page courante ?>">
+                            <a class="page-link bg-success text-light border border-light" href="?page=<?php echo $i; // Lien vers la page 'i' ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <li class="page-item <?php if ($current_page >= $total_pages) echo 'disabled'; // Désactive si sur la dernière page ?>">
+                        <a class="page-link text-success" href="?page=<?php echo $current_page + 1; // Lien vers la page suivante ?>" aria-disabled="<?php if ($current_page >= $total_pages) echo 'true'; ?>">Suivant</a>
                     </li>
                 </ul>
             </nav>

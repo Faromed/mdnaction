@@ -37,6 +37,19 @@ foreach ($projets as $projet) {
         $projets_recents++;
     }
 }
+
+// Pagination Logic
+$items_per_page = 10; // Nombre de projets par page
+$current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Page actuelle
+
+// Appel de la fonction de pagination
+$pagination_data = get_all_paginated($pdo, 'projets', $items_per_page, $current_page, 'date_creation');
+
+$projets = $pagination_data['items'];
+$total_projets = $pagination_data['total_items'];
+$total_pages = $pagination_data['total_pages'];
+$current_page = $pagination_data['current_page'];
+// --- End Pagination Logic ---
 ?>
 
 <div class="container-fluid px-4 py-4">
@@ -370,18 +383,23 @@ foreach ($projets as $projet) {
         </div>
         
         <!-- Pagination -->
-        <?php if (count($projets) > 10): ?>
+        <?php if ($total_pages > 1): // Affiche la pagination seulement s'il y a plus d'une page ?>
         <div class="card-footer bg-white border-0 py-3">
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center mb-0">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Précédent</a>
+
+                    <li class="page-item <?php if ($current_page <= 1) echo 'disabled'; // Désactive si sur la première page ?>">
+                    <a class="page-link text-success" href="?page=<?php echo $current_page - 1; ?>&sort=<?php echo $sort; ?>&order=<?php echo $order; ?>&search=<?php echo urlencode($search); ?>">Précédent</a>
                     </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Suivant</a>
+
+                    <?php for ($i = 1; $i <= $total_pages; $i++): // Boucle pour générer un lien pour chaque page ?>
+                        <li class="page-item <?php if ($i === $current_page) echo 'active'; // Ajoute la classe 'active' pour la page courante ?>">
+                            <a class="page-link bg-success text-light border border-light" href="?page=<?php echo $i; // Lien vers la page 'i' ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <li class="page-item <?php if ($current_page >= $total_pages) echo 'disabled'; // Désactive si sur la dernière page ?>">
+                        <a class="page-link text-success" href="?page=<?php echo $current_page + 1; // Lien vers la page suivante ?>" aria-disabled="<?php if ($current_page >= $total_pages) echo 'true'; ?>">Suivant</a>
                     </li>
                 </ul>
             </nav>
