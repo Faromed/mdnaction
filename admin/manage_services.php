@@ -42,16 +42,16 @@ $prix_moyen = $total_services > 0 ? $total_prix / $total_services : 0;
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none text-success"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Services</li>
                 </ol>
             </nav>
             <h1 class="h2 mb-0 mt-2 fw-bold">
-                <i class="fas fa-briefcase text-primary me-2"></i>Gestion des Services
+                <i class="fas fa-briefcase text-success me-2"></i>Gestion des Services
             </h1>
         </div>
         <div>
-            <a href="add_service.php" class="btn btn-primary">
+            <a href="add_service.php" class="btn btn-success">
                 <i class="fas fa-plus-circle me-2"></i>Nouveau service
             </a>
         </div>
@@ -81,8 +81,8 @@ $prix_moyen = $total_services > 0 ? $total_prix / $total_services : 0;
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-list text-primary fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-list text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Total des services</h6>
@@ -107,8 +107,8 @@ $prix_moyen = $total_services > 0 ? $total_prix / $total_services : 0;
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-calculator text-info fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-calculator text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Prix moyen</h6>
@@ -130,7 +130,7 @@ $prix_moyen = $total_services > 0 ? $total_prix / $total_services : 0;
                                 <i class="fas fa-search text-muted"></i>
                             </span>
                             <input type="text" name="search" class="form-control border-start-0" placeholder="Rechercher un service..." value="<?php echo htmlspecialchars($search); ?>">
-                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                            <button type="submit" class="btn btn-success">Rechercher</button>
                             <?php if (!empty($search)): ?>
                                 <a href="manage_services.php" class="btn btn-outline-secondary">
                                     <i class="fas fa-times"></i>
@@ -140,7 +140,7 @@ $prix_moyen = $total_services > 0 ? $total_prix / $total_services : 0;
                     </form>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <button id="refreshTable" class="btn btn-outline-primary" type="button">
+                    <button id="refreshTable" class="btn btn-outline-success" type="button">
                         <i class="fas fa-sync-alt me-1"></i> Actualiser
                     </button>
                     <div class="btn-group ms-2" role="group">
@@ -208,8 +208,8 @@ $prix_moyen = $total_services > 0 ? $total_prix / $total_services : 0;
                                     
                                     <td class="py-3 px-4">
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
-                                                <i class="fas fa-briefcase text-primary"></i>
+                                            <div class="avatar-sm bg-success bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
+                                                <i class="fas fa-briefcase text-success"></i>
                                             </div>
                                             <div>
                                                 <h6 class="mb-0"><?php echo htmlspecialchars($service['titre']); ?></h6>
@@ -233,15 +233,64 @@ $prix_moyen = $total_services > 0 ? $total_prix / $total_services : 0;
                                     
                                     <td class="py-3 px-4 text-end">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
+                                            <a href="#" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#viewModalService<?php echo $service['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="edit_service.php?id=<?php echo $service['id']; ?>" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                                            <a href="edit_service.php?id=<?php echo $service['id']; ?>" class="btn btn-sm btn-outline-success me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $service['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
+                                        </div>
+
+
+                                        <!-- Modal d'aperçu pour un SERVICE -->
+                                        <div class="modal fade" id="viewModalService<?php echo $service['id']; ?>" tabindex="-1" aria-labelledby="viewModalServiceLabel<?php echo $service['id']; ?>" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewModalServiceLabel<?php echo $service['id']; ?>">
+                                                            <i class="fas fa-concierge-bell text-success me-2"></i>
+                                                            Service: <?php echo htmlspecialchars($service['titre']); ?>
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <?php if(!empty($service['image_ou_icone'])): ?>
+                                                            <div class="text-center mb-3">
+                                                                <img src="../img/<?php echo htmlspecialchars($service['image_ou_icone']); ?>" class="img-fluid rounded" style="max-height: 200px;" alt="<?php echo htmlspecialchars($service['titre']); ?>">
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        
+                                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                                            <h5 class="fw-bold mb-0"><?php echo htmlspecialchars($service['titre']); ?></h5>
+                                                            <span class="badge bg-success px-3 py-2">
+                                                                <i class="fas fa-tag me-1"></i>
+                                                                <?php echo htmlspecialchars($service['prix']); ?>
+                                                            </span>
+                                                        </div>
+                                                        
+                                                        <div class="card bg-light border-0 p-3 mb-3">
+                                                            <h6 class="card-title fw-bold"><i class="fas fa-info-circle text-success me-2"></i>Description</h6>
+                                                            <p class="card-text">
+                                                                <?php echo nl2br(htmlspecialchars($service['description'])); ?>
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <div class="text-muted small">
+                                                            <i class="far fa-calendar-alt me-2"></i> Ajouté le 
+                                                            <?php echo date('d/m/Y à H:i', strtotime($service['date_creation'])); ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                        <a href="edit_service.php?id=<?php echo $service['id']; ?>" class="btn btn-success">
+                                                            <i class="fas fa-edit me-2"></i>Modifier
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         
                                         <!-- Modal de confirmation de suppression -->
@@ -285,7 +334,7 @@ $prix_moyen = $total_services > 0 ? $total_prix / $total_services : 0;
                                         <i class="fas fa-briefcase fa-4x text-muted mb-3"></i>
                                         <h4>Aucun service disponible</h4>
                                         <p class="text-muted"><?php echo !empty($search) ? 'Aucun résultat ne correspond à votre recherche.' : 'Commencez par ajouter un service à votre catalogue.'; ?></p>
-                                        <a href="add_service.php" class="btn btn-primary mt-2">
+                                        <a href="add_service.php" class="btn btn-success mt-2">
                                             <i class="fas fa-plus me-2"></i>Ajouter un service
                                         </a>
                                     </div>

@@ -61,16 +61,16 @@ foreach ($blog_posts as $post) {
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none text-success"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Articles de Blog</li>
                 </ol>
             </nav>
             <h1 class="h2 mb-0 mt-2 fw-bold">
-                <i class="fas fa-blog text-primary me-2"></i>Gestion des Articles de Blog
+                <i class="fas fa-blog text-success me-2"></i>Gestion des Articles de Blog
             </h1>
         </div>
         <div>
-            <a href="add_blog.php" class="btn btn-primary">
+            <a href="add_blog.php" class="btn btn-success">
                 <i class="fas fa-plus-circle me-2"></i>Nouvel article
             </a>
         </div>
@@ -100,8 +100,8 @@ foreach ($blog_posts as $post) {
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-newspaper text-primary fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-newspaper text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Total des articles</h6>
@@ -126,8 +126,8 @@ foreach ($blog_posts as $post) {
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-calendar-alt text-info fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-calendar-alt text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Articles ce mois-ci</h6>
@@ -149,7 +149,7 @@ foreach ($blog_posts as $post) {
                                 <i class="fas fa-search text-muted"></i>
                             </span>
                             <input type="text" name="search" class="form-control border-start-0" placeholder="Rechercher un article ou un auteur..." value="<?php echo htmlspecialchars($search); ?>">
-                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                            <button type="submit" class="btn btn-success">Rechercher</button>
                             <?php if (!empty($search)): ?>
                                 <a href="manage_blog.php" class="btn btn-outline-secondary">
                                     <i class="fas fa-times"></i>
@@ -159,7 +159,7 @@ foreach ($blog_posts as $post) {
                     </form>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <button id="refreshTable" class="btn btn-outline-primary" type="button">
+                    <button id="refreshTable" class="btn btn-outline-success" type="button">
                         <i class="fas fa-sync-alt me-1"></i> Actualiser
                     </button>
                     <div class="btn-group ms-2" role="group">
@@ -227,8 +227,8 @@ foreach ($blog_posts as $post) {
                                     
                                     <td class="py-3 px-4">
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
-                                                <i class="fas fa-file-alt text-primary"></i>
+                                            <div class="avatar-sm bg-success bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
+                                                <i class="fas fa-file-alt text-success"></i>
                                             </div>
                                             <div>
                                                 <h6 class="mb-0"><?php echo htmlspecialchars($post['titre']); ?></h6>
@@ -239,8 +239,8 @@ foreach ($blog_posts as $post) {
                                     
                                     <td class="py-3 px-4">
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-sm bg-info bg-opacity-10 rounded-circle text-center me-2" style="width: 32px; height: 32px; line-height: 32px;">
-                                                <i class="fas fa-user text-info"></i>
+                                            <div class="avatar-sm bg-success bg-opacity-10 rounded-circle text-center me-2" style="width: 32px; height: 32px; line-height: 32px;">
+                                                <i class="fas fa-user text-success"></i>
                                             </div>
                                             <span><?php echo htmlspecialchars($post['auteur']); ?></span>
                                         </div>
@@ -255,15 +255,62 @@ foreach ($blog_posts as $post) {
                                     
                                     <td class="py-3 px-4 text-end">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
+                                            <a href="#" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#viewModal<?php echo $post['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="edit_blog.php?id=<?php echo $post['id']; ?>" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                                            <a href="edit_blog.php?id=<?php echo $post['id']; ?>" class="btn btn-sm btn-outline-success me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $post['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
+                                        </div>
+
+
+
+
+                                        <!-- Modal d'aperçu -->
+                                        <div class="modal fade" id="viewModal<?php echo $post['id']; ?>" tabindex="-1" aria-labelledby="viewModalLabel<?php echo $post['id']; ?>" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewModalLabel<?php echo $post['id']; ?>">
+                                                            <i class="fas fa-blog text-success me-2"></i>
+                                                            <?php echo htmlspecialchars($post['titre']); ?>
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="d-flex align-items-center mb-3">
+                                                            <div class=" bg-success bg-opacity-10 text-center me-3" style="width: 100%; height: auto; line-height: 50px;">
+                                                                <img src="../img/<?php echo htmlspecialchars($post['image']); ?>" alt="" style="width: 100%; height: auto; line-height: 50px;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <h5 class="mb-0"><?php echo 'Auteur : ' . ' ' .htmlspecialchars($post['auteur']); ?></h5>
+                                                        </div>
+                                                        
+                                                        <div class="card bg-light text-center border-0 p-3 mb-3">
+                                                            <blockquote class="blockquote fs-6 mb-0">
+                                                                <i class="fas fa-quote-left text-success opacity-50 me-2"></i>
+                                                                <?php echo nl2br($post['contenu']); ?>
+                                                                <i class="fas fa-quote-right text-success opacity-50 ms-2"></i>
+                                                            </blockquote>
+                                                        </div>
+                                                        
+                                                        <div class="text-muted small">
+                                                            <i class="far fa-calendar-alt me-2"></i> Ajouté le 
+                                                            <?php echo date('d/m/Y à H:i', strtotime($post['date_publication'])); ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                        <a href="edit_blog.php?id=<?php echo $post['id']; ?>" class="btn btn-success">
+                                                            <i class="fas fa-edit me-2"></i>Modifier
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         
                                         <!-- Modal de confirmation de suppression -->
@@ -307,7 +354,7 @@ foreach ($blog_posts as $post) {
                                         <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
                                         <h4>Aucun article de blog disponible</h4>
                                         <p class="text-muted"><?php echo !empty($search) ? 'Aucun résultat ne correspond à votre recherche.' : 'Commencez par ajouter un article à votre blog.'; ?></p>
-                                        <a href="add_blog.php" class="btn btn-primary mt-2">
+                                        <a href="add_blog.php" class="btn btn-success mt-2">
                                             <i class="fas fa-plus me-2"></i>Ajouter un article
                                         </a>
                                     </div>

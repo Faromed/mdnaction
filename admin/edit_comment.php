@@ -2,7 +2,7 @@
 require '../inc/db_config.php';
 require 'inc/auth.php';
 force_login();
-include 'inc/header.php';
+
 include 'inc/functions.php';
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error_message = 'Erreur lors de la mise à jour du commentaire : ' . $e->getMessage();
     }
 }
+include 'inc/header.php';
 ?>
 
 <div class="container-fluid px-4 py-4">

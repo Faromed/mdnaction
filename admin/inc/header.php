@@ -83,10 +83,10 @@
         navLinks.forEach(link => {
             if (link.getAttribute('href') === currentLocation.split('/').pop()) {
                 link.classList.add('active');
-                link.classList.add('bg-primary');
+                link.classList.add('bg-success');
             } else {
                 link.classList.remove('active');
-                link.classList.remove('bg-primary');
+                link.classList.remove('bg-success');
             }
         });
         

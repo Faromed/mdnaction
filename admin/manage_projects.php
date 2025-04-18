@@ -45,16 +45,16 @@ foreach ($projets as $projet) {
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none text-success"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Projets</li>
                 </ol>
             </nav>
             <h1 class="h2 mb-0 mt-2 fw-bold">
-                <i class="fas fa-project-diagram text-primary me-2"></i>Gestion des Projets
+                <i class="fas fa-project-diagram text-success me-2"></i>Gestion des Projets
             </h1>
         </div>
         <div>
-            <a href="add_project.php" class="btn btn-primary">
+            <a href="add_project.php" class="btn btn-success">
                 <i class="fas fa-plus-circle me-2"></i>Nouveau projet
             </a>
         </div>
@@ -84,8 +84,8 @@ foreach ($projets as $projet) {
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-project-diagram text-primary fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-project-diagram text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Total des projets</h6>
@@ -110,8 +110,8 @@ foreach ($projets as $projet) {
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-percentage text-info fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-percentage text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">% Projets récents</h6>
@@ -133,7 +133,7 @@ foreach ($projets as $projet) {
                                 <i class="fas fa-search text-muted"></i>
                             </span>
                             <input type="text" name="search" class="form-control border-start-0" placeholder="Rechercher un projet..." value="<?php echo htmlspecialchars($search); ?>">
-                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                            <button type="submit" class="btn btn-success">Rechercher</button>
                             <?php if (!empty($search)): ?>
                                 <a href="manage_projects.php" class="btn btn-outline-secondary">
                                     <i class="fas fa-times"></i>
@@ -143,7 +143,7 @@ foreach ($projets as $projet) {
                     </form>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <button id="refreshTable" class="btn btn-outline-primary" type="button">
+                    <button id="refreshTable" class="btn btn-outline-success" type="button">
                         <i class="fas fa-sync-alt me-1"></i> Actualiser
                     </button>
                     <div class="btn-group ms-2" role="group">
@@ -211,8 +211,8 @@ foreach ($projets as $projet) {
                                     
                                     <td class="py-3 px-4">
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
-                                                <i class="fas fa-briefcase text-primary"></i>
+                                            <div class="avatar-sm bg-success bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
+                                                <i class="fas fa-briefcase text-success"></i>
                                             </div>
                                             <div>
                                                 <h6 class="mb-0"><?php echo htmlspecialchars($projet['titre']); ?></h6>
@@ -236,15 +236,84 @@ foreach ($projets as $projet) {
                                     
                                     <td class="py-3 px-4 text-end">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
+                                            <a href="#" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#viewModalProjet<?php echo $projet['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="edit_project.php?id=<?php echo $projet['id']; ?>" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                                            <a href="edit_project.php?id=<?php echo $projet['id']; ?>" class="btn btn-sm btn-outline-success me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $projet['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
+                                        </div>
+
+
+
+
+                                        <!-- Modal d'aperçu pour un PROJET -->
+                                        <div class="modal fade" id="viewModalProjet<?php echo $projet['id']; ?>" tabindex="-1" aria-labelledby="viewModalProjetLabel<?php echo $projet['id']; ?>" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewModalProjetLabel<?php echo $projet['id']; ?>">
+                                                            <i class="fas fa-project-diagram text-success me-2"></i>
+                                                            Projet: <?php echo htmlspecialchars($projet['titre']); ?>
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row mb-4">
+                                                            <div class="col-md-6">
+                                                                <div class="card h-100">
+                                                                    <?php if(!empty($projet['image'])): ?>
+                                                                        <img src="../img/<?php echo htmlspecialchars($projet['image']); ?>" class="card-img-top img-fluid" alt="<?php echo htmlspecialchars($projet['titre']); ?>">
+                                                                    <?php else: ?>
+                                                                        <div class="card-img-top bg-light text-center py-5">
+                                                                            <i class="fas fa-image text-muted fa-3x"></i>
+                                                                        </div>
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <h5 class="fw-bold mb-3"><?php echo htmlspecialchars($projet['titre']); ?></h5>
+                                                                
+                                                                <div class="mb-3">
+                                                                    <span class="badge bg-success bg-opacity-10 text-success px-2 py-1 mb-2 d-inline-block">
+                                                                        <i class="fas fa-code me-1"></i>
+                                                                        <?php echo htmlspecialchars($projet['technologies_utilisees']); ?>
+                                                                    </span>
+                                                                </div>
+                                                                
+                                                                <div class="d-grid gap-2">
+                                                                    <?php if(!empty($projet['lien_live'])): ?>
+                                                                        <a href="<?php echo htmlspecialchars($projet['lien_live']); ?>" target="_blank" class="btn btn-sm btn-outline-success">
+                                                                            <i class="fas fa-external-link-alt me-2"></i>Voir le projet en ligne
+                                                                        </a>
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="card bg-light border-0 p-3 mb-3">
+                                                            <h6 class="card-title fw-bold"><i class="fas fa-info-circle text-success me-2"></i>Description</h6>
+                                                            <p class="card-text">
+                                                                <?php echo nl2br(htmlspecialchars($projet['description'])); ?>
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <div class="text-muted small">
+                                                            <i class="far fa-calendar-alt me-2"></i> Ajouté le 
+                                                            <?php echo date('d/m/Y à H:i', strtotime($projet['date_creation'])); ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                        <a href="edit_project.php?id=<?php echo $projet['id']; ?>" class="btn btn-success">
+                                                            <i class="fas fa-edit me-2"></i>Modifier
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         
                                         <!-- Modal de confirmation de suppression -->
@@ -288,7 +357,7 @@ foreach ($projets as $projet) {
                                         <i class="fas fa-briefcase fa-4x text-muted mb-3"></i>
                                         <h4>Aucun service disponible</h4>
                                         <p class="text-muted"><?php echo !empty($search) ? 'Aucun résultat ne correspond à votre recherche.' : 'Commencez par ajouter un service à votre catalogue.'; ?></p>
-                                        <a href="add_service.php" class="btn btn-primary mt-2">
+                                        <a href="add_service.php" class="btn btn-success mt-2">
                                             <i class="fas fa-plus me-2"></i>Ajouter un service
                                         </a>
                                     </div>

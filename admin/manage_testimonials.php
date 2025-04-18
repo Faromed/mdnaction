@@ -62,16 +62,16 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none text-success"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Témoignages</li>
                 </ol>
             </nav>
             <h1 class="h2 mb-0 mt-2 fw-bold">
-                <i class="fas fa-comments text-primary me-2"></i>Gestion des Témoignages
+                <i class="fas fa-comments text-success me-2"></i>Gestion des Témoignages
             </h1>
         </div>
         <div>
-            <a href="add_testimonial.php" class="btn btn-primary">
+            <a href="add_testimonial.php" class="btn btn-success">
                 <i class="fas fa-plus-circle me-2"></i>Nouveau témoignage
             </a>
         </div>
@@ -101,8 +101,8 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-comment-dots text-primary fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-comment-dots text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Total des témoignages</h6>
@@ -127,8 +127,8 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-calendar-alt text-info fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-calendar-alt text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Ajoutés ce mois-ci</h6>
@@ -150,7 +150,7 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
                                 <i class="fas fa-search text-muted"></i>
                             </span>
                             <input type="text" name="search" class="form-control border-start-0" placeholder="Rechercher un nom ou une profession..." value="<?php echo htmlspecialchars($search); ?>">
-                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                            <button type="submit" class="btn btn-success">Rechercher</button>
                             <?php if (!empty($search)): ?>
                                 <a href="manage_testimonials.php" class="btn btn-outline-secondary">
                                     <i class="fas fa-times"></i>
@@ -160,7 +160,7 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
                     </form>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <button id="refreshTable" class="btn btn-outline-primary" type="button">
+                    <button id="refreshTable" class="btn btn-outline-success" type="button">
                         <i class="fas fa-sync-alt me-1"></i> Actualiser
                     </button>
                     <div class="btn-group ms-2" role="group">
@@ -228,8 +228,8 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
                                     
                                     <td class="py-3 px-4">
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
-                                                <i class="fas fa-user text-primary"></i>
+                                            <div class="avatar-sm bg-success bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
+                                                <i class="fas fa-user text-success"></i>
                                             </div>
                                             <div>
                                                 <h6 class="mb-0"><?php echo htmlspecialchars($testimonial['nom']); ?></h6>
@@ -239,7 +239,7 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
                                     </td>
                                     
                                     <td class="py-3 px-4">
-                                        <span class="badge bg-info bg-opacity-10 text-info px-3 py-2 fw-semibold">
+                                        <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 fw-semibold">
                                             <i class="fas fa-briefcase me-1"></i>
                                             <?php echo htmlspecialchars($testimonial['profession']); ?>
                                         </span>
@@ -257,7 +257,7 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
                                             <a href="#" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#viewModal<?php echo $testimonial['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="edit_testimonial.php?id=<?php echo $testimonial['id']; ?>" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                                            <a href="edit_testimonial.php?id=<?php echo $testimonial['id']; ?>" class="btn btn-sm btn-outline-success me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $testimonial['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
@@ -271,15 +271,15 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="viewModalLabel<?php echo $testimonial['id']; ?>">
-                                                            <i class="fas fa-comment-dots text-primary me-2"></i>
+                                                            <i class="fas fa-comment-dots text-success me-2"></i>
                                                             Témoignage de <?php echo htmlspecialchars($testimonial['nom']); ?>
                                                         </h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="d-flex align-items-center mb-3">
-                                                            <div class="avatar-sm bg-primary bg-opacity-10 rounded-circle text-center me-3" style="width: 50px; height: 50px; line-height: 50px;">
-                                                                <i class="fas fa-user text-primary fa-lg"></i>
+                                                            <div class="avatar-sm bg-success bg-opacity-10 rounded-circle text-center me-3" style="width: 50px; height: 50px; line-height: 50px;">
+                                                                <i class="fas fa-user text-success fa-lg"></i>
                                                             </div>
                                                             <div>
                                                                 <h5 class="mb-0"><?php echo htmlspecialchars($testimonial['nom']); ?></h5>
@@ -292,9 +292,9 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
                                                         
                                                         <div class="card bg-light border-0 p-3 mb-3">
                                                             <blockquote class="blockquote fs-6 mb-0">
-                                                                <i class="fas fa-quote-left text-primary opacity-50 me-2"></i>
-                                                                <?php echo nl2br(htmlspecialchars($testimonial['contenu'])); ?>
-                                                                <i class="fas fa-quote-right text-primary opacity-50 ms-2"></i>
+                                                                <i class="fas fa-quote-left text-success opacity-50 me-2"></i>
+                                                                <?php echo nl2br(htmlspecialchars($testimonial['temoignage'])); ?>
+                                                                <i class="fas fa-quote-right text-success opacity-50 ms-2"></i>
                                                             </blockquote>
                                                         </div>
                                                         
@@ -305,7 +305,7 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                                        <a href="edit_testimonial.php?id=<?php echo $testimonial['id']; ?>" class="btn btn-primary">
+                                                        <a href="edit_testimonial.php?id=<?php echo $testimonial['id']; ?>" class="btn btn-success">
                                                             <i class="fas fa-edit me-2"></i>Modifier
                                                         </a>
                                                     </div>
@@ -355,7 +355,7 @@ $top_profession = !empty($professions) ? array_search(max($professions), $profes
                                         <i class="fas fa-comments fa-4x text-muted mb-3"></i>
                                         <h4>Aucun témoignage disponible</h4>
                                         <p class="text-muted"><?php echo !empty($search) ? 'Aucun résultat ne correspond à votre recherche.' : 'Commencez par ajouter un témoignage de vos clients.'; ?></p>
-                                        <a href="add_testimonial.php" class="btn btn-primary mt-2">
+                                        <a href="add_testimonial.php" class="btn btn-success mt-2">
                                             <i class="fas fa-plus me-2"></i>Ajouter un témoignage
                                         </a>
                                     </div>

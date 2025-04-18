@@ -81,8 +81,8 @@ $prix_moyen = $total_formations > 0 ? $total_prix / $total_formations : 0;
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-danger bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-list text-danger fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-list text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Total des formations</h6>
@@ -107,8 +107,8 @@ $prix_moyen = $total_formations > 0 ? $total_prix / $total_formations : 0;
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-calculator text-info fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-calculator text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Prix moyen</h6>
@@ -233,15 +233,103 @@ $prix_moyen = $total_formations > 0 ? $total_prix / $total_formations : 0;
                                     
                                     <td class="py-3 px-4 text-end">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
+                                            <a href="#" class="btn btn-sm btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#viewModalFormation<?php echo $formation['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Aperçu">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="edit_formation.php?id=<?php echo $formation['id']; ?>" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                                            <a href="edit_formation.php?id=<?php echo $formation['id']; ?>" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $formation['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
+                                        </div>
+
+
+
+                                        <!-- Modal d'aperçu pour une FORMATION -->
+                                        <div class="modal fade" id="viewModalFormation<?php echo $formation['id']; ?>" tabindex="-1" aria-labelledby="viewModalFormationLabel<?php echo $formation['id']; ?>" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="viewModalFormationLabel<?php echo $formation['id']; ?>">
+                                                            <i class="fas fa-graduation-cap text-success me-2"></i>
+                                                            Formation: <?php echo htmlspecialchars($formation['titre']); ?>
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row mb-4">
+                                                            <div class="col-md-5">
+                                                                <div class="card h-80">
+                                                                    <?php if(!empty($formation['miniature'])): ?>
+                                                                        <img src="../img/<?php echo htmlspecialchars($formation['miniature']); ?>" class="card-img-top img-fluid" alt="<?php echo htmlspecialchars($formation['titre']); ?>">
+                                                                    <?php else: ?>
+                                                                        <div class="card-img-top bg-light text-center py-5">
+                                                                            <i class="fas fa-image text-muted fa-3x"></i>
+                                                                        </div>
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <h5 class="fw-bold mb-3"><?php echo htmlspecialchars($formation['titre']); ?></h5>
+                                                                
+                                                                <div class="mb-3">
+                                                                    <div class="d-flex flex-wrap mb-2">
+                                                                        <span class="badge bg-success bg-opacity-10 text-success px-2 py-1 me-2 mb-2">
+                                                                            <i class="fas fa-clock me-1"></i>
+                                                                            Durée: <?php echo htmlspecialchars($formation['duree']); ?>
+                                                                        </span>
+                                                                        <span class="badge bg-danger bg-opacity-10 text-danger px-2 py-1 me-2 mb-2">
+                                                                            <i class="fas fa-tag me-1"></i>
+                                                                            Prix: <?php echo htmlspecialchars($formation['prix']); ?>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="card bg-light border-0 p-2 mb-3">
+                                                                    <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-tools me-1"></i> Outils utilisés</h6>
+                                                                    <p class="card-text">
+                                                                        <?php echo htmlspecialchars($formation['outils']); ?>
+                                                                    </p>
+                                                                </div>
+                                                                
+                                                                <div class="card bg-light border-0 p-2 mb-3">
+                                                                    <h6 class="card-subtitle mb-2 text-muted"><i class="fas fa-hand-paper me-1"></i> Pré-requis</h6>
+                                                                    <p class="card-text">
+                                                                        <?php echo htmlspecialchars($formation['competences_requises']); ?>
+                                                                    </p>
+                                                                </div>
+                                                                
+                                                                <?php if(!empty($formation['lien_paiement'])): ?>
+                                                                    <div class="d-grid gap-2">
+                                                                        <a href="<?php echo htmlspecialchars($formation['lien_paiement']); ?>" target="_blank" class="btn btn-outline-success">
+                                                                            <i class="fas fa-shopping-cart me-2"></i>S'inscrire
+                                                                        </a>
+                                                                    </div>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="card bg-light border-0 p-3 mb-3">
+                                                            <h6 class="card-title fw-bold"><i class="fas fa-success-circle text-success me-2"></i>Description</h6>
+                                                            <div class="card-text">
+                                                                <?php echo $formation['description']; ?>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="text-muted small">
+                                                            <i class="far fa-calendar-alt me-2"></i> Ajouté le 
+                                                            <?php echo date('d/m/Y à H:i', strtotime($formation['date_creation'])); ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                                        <a href="edit_formation.php?id=<?php echo $formation['id']; ?>" class="btn btn-success">
+                                                            <i class="fas fa-edit me-2"></i>Modifier
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         
                                         <!-- Modal de confirmation de suppression -->
@@ -285,7 +373,7 @@ $prix_moyen = $total_formations > 0 ? $total_prix / $total_formations : 0;
                                         <i class="fas fa-graduation-cap fa-4x text-muted mb-3"></i>
                                         <h4>Aucune formation disponible</h4>
                                         <p class="text-muted"><?php echo !empty($search) ? 'Aucun résultat ne correspond à votre recherche.' : 'Commencez par ajouter une formation à votre catalogue.'; ?></p>
-                                        <a href="add_formation.php" class="btn btn-primary mt-2">
+                                        <a href="add_formation.php" class="btn btn-success mt-2">
                                             <i class="fas fa-plus me-2"></i>Ajouter une formation
                                         </a>
                                     </div>

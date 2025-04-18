@@ -44,12 +44,12 @@ $pending_comments = $total_comments - $approved_comments;
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.php" class="text-decoration-none text-success"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Commentaires</li>
                 </ol>
             </nav>
             <h1 class="h2 mb-0 mt-2 fw-bold">
-                <i class="fas fa-comments text-primary me-2"></i>Gestion des Commentaires
+                <i class="fas fa-comments text-success me-2"></i>Gestion des Commentaires
             </h1>
         </div>
         <div>
@@ -83,8 +83,8 @@ $pending_comments = $total_comments - $approved_comments;
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-comments text-primary fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-comments text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">Total des commentaires</h6>
@@ -109,8 +109,8 @@ $pending_comments = $total_comments - $approved_comments;
         <div class="col-md-4">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body d-flex align-items-center">
-                    <div class="rounded-circle bg-warning bg-opacity-10 p-3 me-3">
-                        <i class="fas fa-clock text-warning fa-2x"></i>
+                    <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                        <i class="fas fa-clock text-success fa-2x"></i>
                     </div>
                     <div>
                         <h6 class="text-muted mb-1">En attente d'approbation</h6>
@@ -132,7 +132,7 @@ $pending_comments = $total_comments - $approved_comments;
                                 <i class="fas fa-search text-muted"></i>
                             </span>
                             <input type="text" name="search" class="form-control border-start-0" placeholder="Rechercher un commentaire..." value="<?php echo htmlspecialchars($search); ?>">
-                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                            <button type="submit" class="btn btn-success">Rechercher</button>
                             <?php if (!empty($search)): ?>
                                 <a href="manage_comments.php" class="btn btn-outline-secondary">
                                     <i class="fas fa-times"></i>
@@ -142,7 +142,7 @@ $pending_comments = $total_comments - $approved_comments;
                     </form>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <button id="refreshTable" class="btn btn-outline-primary" type="button">
+                    <button id="refreshTable" class="btn btn-outline-success" type="button">
                         <i class="fas fa-sync-alt me-1"></i> Actualiser
                     </button>
                     <div class="btn-group ms-2" role="group">
@@ -214,8 +214,8 @@ $pending_comments = $total_comments - $approved_comments;
                                     
                                     <td class="py-3 px-4">
                                         <div class="d-flex align-items-center">
-                                            <div class="avatar-sm bg-info bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
-                                                <i class="fas fa-user text-info"></i>
+                                            <div class="avatar-sm bg-success bg-opacity-10 rounded-circle text-center me-3" style="width: 40px; height: 40px; line-height: 40px;">
+                                                <i class="fas fa-user text-success"></i>
                                             </div>
                                             <div>
                                                 <h6 class="mb-0"><?php echo htmlspecialchars($comment['nom']); ?></h6>
@@ -225,7 +225,7 @@ $pending_comments = $total_comments - $approved_comments;
                                     </td>
                                     
                                     <td class="py-3 px-4">
-                                        <a href="../blog_post.php?id=<?php echo $comment['article_id']; ?>" target="_blank" class="text-decoration-none">
+                                        <a href="../blog_post.php?id=<?php echo $comment['article_id']; ?>" target="_blank" class="text-decoration-none text-success">
                                             <?php echo htmlspecialchars($comment['article_titre']); ?>
                                         </a>
                                     </td>
@@ -263,7 +263,7 @@ $pending_comments = $total_comments - $approved_comments;
                                                     <i class="fas fa-check"></i>
                                                 </a>
                                             <?php endif; ?>
-                                            <a href="edit_comment.php?id=<?php echo $comment['id']; ?>" class="btn btn-sm btn-outline-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
+                                            <a href="edit_comment.php?id=<?php echo $comment['id']; ?>" class="btn btn-sm btn-outline-info me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Modifier">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $comment['id']; ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
