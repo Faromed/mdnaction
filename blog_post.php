@@ -47,7 +47,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <div class="card border-0 shadow-sm mb-5">
                 <div class="card-header bg-white py-3">
                     <h3 class="mb-0 fw-bold">
-                        <i class="fas fa-comments text-primary me-2"></i>Commentaires
+                        <i class="fas fa-comments text-success me-2"></i>Commentaires
                     </h3>
                 </div>
                 <div class="card-body p-4">
@@ -62,7 +62,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         <div class="d-flex mb-4">
                             <div class="flex-shrink-0">
                                 <div class="bg-light rounded-circle d-flex justify-content-center align-items-center" style="width: 50px; height: 50px;">
-                                    <i class="fas fa-user text-primary"></i>
+                                    <i class="fas fa-user text-success"></i>
                                 </div>
                             </div>
                             <div class="ms-3 flex-grow-1">
@@ -70,7 +70,16 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                     <h6 class="fw-bold mb-0"><?php echo htmlspecialchars($comment['nom']); ?></h6>
                                     <small class="text-muted ms-2">• <?php echo date('d/m/Y à H:i', strtotime($comment['date_creation'])); ?></small>
                                 </div>
-                                <p class="mb-0"><?php echo htmlspecialchars($comment['contenu']); ?></p>
+                                <p class="mb-0"><?php echo htmlspecialchars($comment['contenu']); ?></p> 
+                                <!-- Réponse de l'administrateur -->
+                                <div class="admin-reply mt-3 ms-4 border-start border-success ps-3">
+                                    <div class="d-flex align-items-center mb-1">
+                                        <span class="badge bg-success me-2">Admin</span>
+                                        <h6 class="fw-bold mb-0 small"></h6>
+                                        <small class="text-muted ms-2"></small>
+                                    </div>
+                                    <p class="mb-0 fst-italic"><?php echo htmlspecialchars($comment['reponse_admin']); ?></p>
+                                </div>
                             </div>
                         </div>
                     <?php
@@ -86,7 +95,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white py-3">
                     <h4 class="mb-0 fw-bold">
-                        <i class="fas fa-pen-alt text-primary me-2"></i>Laisser un commentaire
+                        <i class="fas fa-pen-alt text-success me-2"></i>Laisser un commentaire
                     </h4>
                 </div>
                 <div class="card-body p-4">
@@ -130,7 +139,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button type="submit" name="submit_comment" class="btn btn-primary">
+                                <button type="submit" name="submit_comment" class="btn btn-success">
                                     <i class="fas fa-paper-plane me-2"></i>Soumettre le commentaire
                                 </button>
                             </div>
@@ -145,7 +154,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             <!-- Articles récents -->
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-header bg-white py-3">
-                    <h4 class="mb-0 fw-bold"><i class="fas fa-newspaper text-primary me-2"></i>Articles récents</h4>
+                    <h4 class="mb-0 fw-bold"><i class="fas fa-newspaper text-success me-2"></i>Articles récents</h4>
                 </div>
                 <div class="card-body">
                     <ul class="list-unstyled mb-0">
@@ -155,7 +164,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                         ?>
                         <li class="mb-3 pb-3 border-bottom">
                             <a href="blog_post.php?id=<?php echo $recent_post['id']; ?>" class="text-decoration-none d-flex align-items-center">
-                                <i class="fas fa-angle-right text-primary me-2"></i>
+                                <i class="fas fa-angle-right text-success me-2"></i>
                                 <div>
                                     <h6 class="mb-0 text-body"><?php echo $recent_post['titre']; ?></h6>
                                     <small class="text-muted"><?php echo date('d/m/Y', strtotime($recent_post['date_publication'])); ?></small>
@@ -166,14 +175,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </ul>
                 </div>
                 <div class="card-footer bg-white py-3">
-                    <a href="blog.php" class="btn btn-outline-primary btn-sm w-100">
+                    <a href="blog.php" class="btn btn-outline-success btn-sm w-100">
                         <i class="fas fa-arrow-right me-2"></i>Tous les articles
                     </a>
                 </div>
             </div>
 
             <!-- CTA Card -->
-            <div class="card border-0 shadow-sm bg-primary text-white">
+            <div class="card border-0 shadow-sm bg-success text-white">
                 <div class="card-body text-center p-4">
                     <i class="fas fa-envelope-open-text fa-3x mb-3"></i>
                     <h4 class="fw-bold mb-3">Besoin d'aide pour votre projet ?</h4>

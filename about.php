@@ -3,41 +3,40 @@
 <div class="container py-5">
     <!-- Section d'en-tête avec fond subtil -->
     <div class="bg-white shadow-sm rounded-3 p-4 mb-5">
-        <h1 class="display-4 text-center mb-3 fw-bold text-primary">À Propos de Moi</h1>
+        <h1 class="display-4 text-center mb-3 fw-bold text-success">À Propos de Moi</h1>
         <div class="text-center">
-            <div class="border-bottom border-2 border-primary mx-auto mb-4" style="width: 100px;"></div>
+            <div class="border-bottom border-2 border-success mx-auto mb-4" style="width: 100px;"></div>
         </div>
     </div>
     
     <div class="row g-4 align-items-center">
         <!-- Colonne photo -->
         <div class="col-lg-4">
-            <div class="position-relative mb-4">
-                <div class="bg-primary position-absolute rounded-circle" style="width: 95%; height: 95%; bottom: -10px; right: -10px; z-index: 0;"></div>
-                <img src="img/mdn.jpeg" alt="Votre Photo" class="img-fluid rounded-circle shadow position-relative" style="z-index: 1;">
+            <div class="position-relative mb-4 text-center">
+                <img src="img/mdn.jpg" alt="Ma photo" class="rounded-circle img-thumbnail mb-3" style="width: 250px; height: 250px; object-fit: cover;">
             </div>
             
             <!-- Carte de contact rapide -->
             <div class="card border-0 shadow-sm rounded-3 p-3 mb-4">
                 <div class="d-flex align-items-center mb-3">
-                    <i class="fas fa-envelope text-primary me-3 fa-lg"></i>
+                    <i class="fas fa-envelope text-success me-3 fa-lg"></i>
                     <div>
                         <small class="text-muted d-block">Email</small>
-                        <span>contact@votre-domaine.com</span>
+                        <span>mdnaction1@gmail.com</span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center mb-3">
-                    <i class="fas fa-phone text-primary me-3 fa-lg"></i>
+                    <i class="fas fa-phone text-success me-3 fa-lg"></i>
                     <div>
                         <small class="text-muted d-block">Téléphone</small>
-                        <span>+33 6 XX XX XX XX</span>
+                        <span>+229 0164979790</span>
                     </div>
                 </div>
                 <div class="d-flex align-items-center">
-                    <i class="fas fa-map-marker-alt text-primary me-3 fa-lg"></i>
+                    <i class="fas fa-map-marker-alt text-success me-3 fa-lg"></i>
                     <div>
                         <small class="text-muted d-block">Localisation</small>
-                        <span>Paris, France</span>
+                        <span>Cotonou, Bénin</span>
                     </div>
                 </div>
             </div>
@@ -45,13 +44,13 @@
             <!-- Réseaux sociaux -->
             <div class="d-flex justify-content-center mt-4">
                 <a href="#" class="btn btn-light rounded-circle shadow-sm mx-2" title="LinkedIn">
-                    <i class="fab fa-linkedin text-primary"></i>
+                    <i class="fab fa-linkedin text-success"></i>
                 </a>
                 <a href="#" class="btn btn-light rounded-circle shadow-sm mx-2" title="GitHub">
-                    <i class="fab fa-github text-primary"></i>
+                    <i class="fab fa-github text-success"></i>
                 </a>
                 <a href="#" class="btn btn-light rounded-circle shadow-sm mx-2" title="Twitter">
-                    <i class="fab fa-twitter text-primary"></i>
+                    <i class="fab fa-twitter text-success"></i>
                 </a>
             </div>
         </div>
@@ -60,7 +59,7 @@
         <div class="col-lg-8">
             <div class="card border-0 shadow-sm rounded-3 p-4">
                 <h2 class="h3 mb-4">
-                    <i class="fas fa-user-circle text-primary me-2"></i>
+                    <i class="fas fa-user-circle text-success me-2"></i>
                     Biographie Professionnelle
                 </h2>
                 
@@ -83,7 +82,7 @@
                 </div>
                 
                 <!-- Citation -->
-                <div class="bg-light p-4 rounded-3 mb-4 border-start border-4 border-primary">
+                <div class="bg-light p-4 rounded-3 mb-4 border-start border-4 border-success">
                     <p class="fst-italic mb-0">
                         "Passionné par le développement web depuis 2015, j'ai acquis une solide expérience dans la création de sites web performants et intuitifs. Mon objectif est d'aider les autres à maîtriser les outils du web pour développer leurs propres projets et atteindre leurs objectifs professionnels."
                     </p>
@@ -91,10 +90,10 @@
                 
                 <!-- Boutons d'action -->
                 <div class="d-flex flex-wrap gap-3 mt-4">
-                    <a href="img/votre_cv.pdf" class="btn btn-primary shadow-sm" download>
+                    <a href="img/votre_cv.pdf" class="btn btn-success shadow-sm" download>
                         <i class="fas fa-file-download me-2"></i>Télécharger mon CV
                     </a>
-                    <a href="contact.php" class="btn btn-outline-primary">
+                    <a href="contact.php" class="btn btn-outline-success">
                         <i class="fas fa-paper-plane me-2"></i>Me contacter
                     </a>
                 </div>
@@ -106,15 +105,15 @@
     <div class="row mt-5 g-4">
         <div class="col-12">
             <h2 class="h3 text-center mb-4">
-                <i class="fas fa-star text-primary me-2"></i>
+                <i class="fas fa-star text-success me-2"></i>
                 Mes Valeurs
             </h2>
         </div>
         
         <div class="col-md-4">
             <div class="card border-0 shadow-sm rounded-3 p-4 h-100 text-center">
-                <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-flex mx-auto mb-3" style="width: 80px; height: 80px;">
-                    <i class="fas fa-lightbulb text-primary m-auto fa-2x"></i>
+                <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-flex mx-auto mb-3" style="width: 80px; height: 80px;">
+                    <i class="fas fa-lightbulb text-success m-auto fa-2x"></i>
                 </div>
                 <h3 class="h5 mb-3">Innovation</h3>
                 <p class="mb-0">Toujours à l'affût des dernières technologies pour proposer des solutions modernes et performantes.</p>
@@ -123,8 +122,8 @@
         
         <div class="col-md-4">
             <div class="card border-0 shadow-sm rounded-3 p-4 h-100 text-center">
-                <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-flex mx-auto mb-3" style="width: 80px; height: 80px;">
-                    <i class="fas fa-handshake text-primary m-auto fa-2x"></i>
+                <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-flex mx-auto mb-3" style="width: 80px; height: 80px;">
+                    <i class="fas fa-handshake text-success m-auto fa-2x"></i>
                 </div>
                 <h3 class="h5 mb-3">Engagement</h3>
                 <p class="mb-0">Dédié à l'excellence et à la satisfaction client pour des résultats qui dépassent vos attentes.</p>
@@ -133,8 +132,8 @@
         
         <div class="col-md-4">
             <div class="card border-0 shadow-sm rounded-3 p-4 h-100 text-center">
-                <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-flex mx-auto mb-3" style="width: 80px; height: 80px;">
-                    <i class="fas fa-comments text-primary m-auto fa-2x"></i>
+                <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-flex mx-auto mb-3" style="width: 80px; height: 80px;">
+                    <i class="fas fa-comments text-success m-auto fa-2x"></i>
                 </div>
                 <h3 class="h5 mb-3">Communication</h3>
                 <p class="mb-0">Une approche transparente et des échanges clairs pour une collaboration efficace et sereine.</p>
