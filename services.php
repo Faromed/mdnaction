@@ -48,15 +48,16 @@
         ?>
         <div class="col">
             <div class="card h-100 border-0 shadow-sm rounded-3 service-card">
+                <?php if ($row['image_ou_icone']): ?>
+                    <img src="img/<?php echo $row['image_ou_icone']; ?>" class="card-img-top" alt="<?php echo $row['titre']; ?>" style="height: 200px; object-fit: cover;">
+                <?php endif; ?>
                 <div class="card-body p-4">
                     <div class="d-flex align-items-center mb-4">
+                        <?php if (!$row['image_ou_icone']): ?>
                         <div class="service-icon bg-<?php echo $card_color; ?> text-white">
-                            <?php if ($row['image_ou_icone']): ?>
-                                <img src="img/<?php echo $row['image_ou_icone']; ?>" alt="<?php echo $row['titre']; ?>" class="img-fluid">
-                            <?php else: ?>
-                                <i class="<?php echo $icon_class; ?> fa-2x"></i>
-                            <?php endif; ?>
+                            <i class="<?php echo $icon_class; ?> fa-2x"></i>
                         </div>
+                        <?php endif; ?>
                         <h3 class="card-title h4 ms-3 mb-0"><?php echo $row['titre']; ?></h3>
                     </div>
                     <p class="card-text text-muted"><?php echo $row['description']; ?></p>
