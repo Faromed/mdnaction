@@ -1,15 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
-require '../inc/db_config.php';
-require 'inc/auth.php';
+require './inc/db_config.php';
+require './inc/auth.php';
 force_login();
 include 'inc/header.php';
 
-$upload_directory = '../img/';
+$upload_directory = './img/';
 $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif'];
 $max_file_size = 2 * 1024 * 1024; // 2MB
 
 if (isset($_POST['upload'])) {
-    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $file_name = $_FILES['image']['name'];
         $file_tmp_name = $_FILES['image']['tmp_name'];
         $file_size = $_FILES['image']['size'];
@@ -36,7 +48,8 @@ if (isset($_POST['upload'])) {
 }
 
 // Lister les images déjà présentes dans le dossier
-$images = array_diff(scandir($upload_directory), array('..', '.'));
+$images = array_diff(scandir($upload_directory), array('.', '..'));
+
 ?>
 
 <h2>Téléverser une Image</h2>
@@ -61,17 +74,17 @@ $images = array_diff(scandir($upload_directory), array('..', '.'));
 
 <h3>Images Téléversées</h3>
 
-<?php if (!empty($images)): ?>
+<?php if (empty($images)): ?>
+    <p>Aucune image n'a encore été téléversée.</p>
+<?php else: ?>
     <div class="row">
         <?php foreach ($images as $image): ?>
             <div class="col-md-3 mb-3">
-                <img src="../img/<?php echo $image; ?>" alt="<?php echo htmlspecialchars($image); ?>" class="img-thumbnail">
+                <img src="./img/<?php echo htmlspecialchars($image); ?>" alt="<?php echo htmlspecialchars($image); ?>" class="img-thumbnail">
                 <p class="mt-2">Nom du fichier : <code><?php echo htmlspecialchars($image); ?></code></p>
             </div>
         <?php endforeach; ?>
     </div>
-<?php else: ?>
-    <p>Aucune image n'a encore été téléversée.</p>
 <?php endif; ?>
 
 <?php include 'inc/footer.php'; ?>

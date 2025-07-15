@@ -23,8 +23,31 @@ if (!$service) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = trim($_POST['titre']);
     $description = trim($_POST['description']);
-    $image = trim($_POST['miniature']);
     $prix = trim($_POST['prix']);
+    $image_ou_icone = trim($_POST['miniature']);
+
+    // Gérer l'upload de la nouvelle image
+    if (isset($_FILES['new_image']) && $_FILES['new_image']['error'] == 0) {
+        $target_dir = "../img/";
+        $target_file = $target_dir . basename($_FILES["new_image"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+        // Allow certain file formats
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+            $_SESSION['error_message'] = "Désolé, seuls les fichiers JPG, JPEG, PNG et GIF sont autorisés.";
+            header('Location: edit_service.php?id=' . $id);
+            exit;
+        }
+
+        if (move_uploaded_file($_FILES["new_image"]["tmp_name"], $target_file)) {
+            $image_ou_icone = basename($_FILES["new_image"]["name"]);
+        } else {
+            $_SESSION['error_message'] = "Désolé, une erreur s'est produite lors du téléchargement de votre fichier.";
+            header('Location: edit_service.php?id=' . $id);
+            exit;
+        }
+    }
 
     // Validation des données
     $errors = [];
@@ -40,11 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("UPDATE services SET 
                 titre = ?, 
                 description = ?, 
-                image = ?, 
+                image_ou_icone = ?, 
                 prix = ?,
                 date_modification = NOW()
                 WHERE id = ?");
-            $stmt->execute([$titre, $description, $image, $prix, $id]);
+            $stmt->execute([$titre, $description, $image_ou_icone, $prix, $id]);
             
             $_SESSION['success_message'] = 'Le service <strong>' . htmlspecialchars($titre) . '</strong> a été mis à jour avec succès.';
             header('Location: manage_services.php');
@@ -146,7 +169,7 @@ include 'inc/header.php';
     <!-- Formulaire de modification -->
     <div class="card border-0 shadow-sm">
         <div class="card-body p-4">
-            <form method="post" id="updateServiceForm">
+            <form method="post" id="updateServiceForm" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?php echo $service['id']; ?>">
                 
                 <div class="row g-4">
@@ -188,31 +211,31 @@ include 'inc/header.php';
                                 <h5 class="mb-0"><i class="fas fa-image me-2"></i>Image principale</h5>
                             </div>
                             <div class="card-body">
-                                <?php if (!empty($post['image']) && file_exists($images_directory . $service['image'])): ?>
+                                <?php if (!empty($service['image_ou_icone']) && file_exists('../img/' . $service['image_ou_icone'])): ?>
                                     <div class="text-center mb-3">
-                                        <img src="<?php echo '../img/blog/' . htmlspecialchars($service['image']); ?>" alt="Image de l'article" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
+                                        <img src="<?php echo '../img/' . htmlspecialchars($service['image_ou_icone']); ?>" alt="Image du service" class="img-fluid rounded shadow-sm" style="max-height: 200px;">
                                     </div>
                                 <?php endif; ?>
                                 
                                 <div class="mb-3">
-                                    <label for="miniature" class="form-label fw-semibold">Nom du fichier image</label>
+                                    <label for="miniature" class="form-label fw-semibold">Image existante</label>
                                     <div class="input-group">
                                         <select class="form-select form-select-success border-success image-select" id="miniature" name="miniature">
                                             <option value="">Sélectionnez une image</option>
                                             <?php foreach ($images as $image): ?>
                                                 <option value="<?php echo htmlspecialchars($image['nom_fichier']); ?>" 
                                                         data-img-src="<?php echo htmlspecialchars($image['chemin']); ?>"
-                                                        <?php if ($service['image'] == $image['nom_fichier']) echo 'selected'; ?>>
+                                                        <?php if ($service['image_ou_icone'] == $image['nom_fichier']) echo 'selected'; ?>>
                                                     <?php echo htmlspecialchars($image['nom_fichier']); ?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <div class="form-text">
-                                        <a href="upload_image.php" target="_blank" class="text-decoration-none text-success">
-                                            <i class="fas fa-upload me-1"></i>Téléverser une nouvelle image
-                                        </a>
-                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="new_image" class="form-label fw-semibold">Ou téléverser une nouvelle image</label>
+                                    <input type="file" class="form-control" id="new_image" name="new_image">
                                 </div>
                                 <div class="mt-4" id="image-preview">
                                     <div class="text-center p-5 border border-dashed rounded">
